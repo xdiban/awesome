@@ -27,7 +27,7 @@ theme.fg_focus      = theme.bg_normal
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.bg_normal
 
-theme.useless_gap   = dpi(3)
+theme.useless_gap   = dpi(10)
 theme.border_width  = dpi(2)
 theme.border_normal = xrdb.color0
 theme.border_focus  = theme.bg_focus
@@ -118,7 +118,7 @@ for s in theme.bg_normal:gmatch("[a-fA-F0-9][a-fA-F0-9]") do
 end
 local is_dark_bg = (bg_numberic_value < 383)
 
--- Generate wallpaper:
+--[[ Generate wallpaper:
 local wallpaper_bg = xrdb.color8
 local wallpaper_fg = xrdb.color7
 local wallpaper_alt_fg = xrdb.color12
@@ -130,5 +130,9 @@ theme.wallpaper = function(s)
 end
 
 return theme
+]]
 
+-- Wallpaper
+ theme.wallpaper = "./wallpaper.png"
+ return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
