@@ -133,6 +133,6 @@ return theme
 ]]
 
 -- Wallpaper
- theme.wallpaper = "~/.config/awesome/themes/edamame/wallpaper.png"
+ theme.wallpaper = "~/.config/awesome/wallpaper/dark-dune.png"
  return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
