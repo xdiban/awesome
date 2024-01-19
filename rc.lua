@@ -88,6 +88,7 @@ awful.layout.layouts = {
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
+
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
@@ -101,9 +102,10 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
+--[[                       
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
-
+--]]
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -613,6 +615,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- Autostart applications:
-awful.spawn.with_shell("picom -b --config ./picom/picom.conf")
+awful.spawn.with_shell("picom -b --config ~/.config/awesome/picom/picom.conf")
 awful.spawn.once("nitrogen --restore")
 awful.spawn.with_shell("setxkbmap -model pc105 -option 'grp:shifts_toggle,compose:sclk' 'us,us(intl)'")
