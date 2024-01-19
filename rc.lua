@@ -55,8 +55,8 @@ editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox"
 screenshot = "flameshot gui"
-lock = "xtrlock"
-lock_suspend = "i3lock -c 000000 --no-unlock-indicator"
+lock = "i3lock -c 000000 --no-unlock-indicator"
+lock_lock = "xtrlock"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -362,12 +362,17 @@ globalkeys = gears.table.join(
 
     -- Lock screen
     awful.key({ modkey, "Shift" }, "d", function ()
+       awful.spawn(lock_lock) end,
+       {description = "lock screen", group = "awesome"}),
+
+    -- Lock screen
+    awful.key({ modkey, "Shift" }, "f", function ()
        awful.spawn(lock) end,
        {description = "lock screen", group = "awesome"}),
 
     -- Suspend
     awful.key({ modkey, "Shift" }, "s", function ()
-       awful.spawn("bash -c '" .. lock_suspend .. " && systemctl suspend'") end,
+       awful.spawn("bash -c '" .. lock .. " && systemctl suspend'") end,
        {description = "suspend", group = "awesome"})
 )
 
@@ -608,6 +613,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- Autostart applications:
-awful.spawn.with_shell("picom")
+awful.spawn.with_shell("picom --experimental-backend --transparent-clipping")
 awful.spawn.once("nitrogen --restore")
 awful.spawn.with_shell("setxkbmap -model pc105 -option 'grp:shifts_toggle,compose:sclk' 'us,us(intl)'")
