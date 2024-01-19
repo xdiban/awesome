@@ -50,13 +50,13 @@ local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.ge
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "kitty"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
-browser = "firefox"
-screenshot = "flameshot gui"
-lock = "i3lock -c 000000 --no-unlock-indicator"
-lock_lock = "xtrlock"
+local terminal = "kitty"
+local editor = os.getenv("EDITOR") or "nvim"
+local editor_cmd = terminal .. " -e " .. editor
+local browser = "firefox"
+local screenshot = "flameshot gui"
+local lock = "i3lock -c 000000 --no-unlock-indicator"
+local lock_lock = "xtrlock"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -177,7 +177,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6",}, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9",}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -616,5 +616,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart applications:
 awful.spawn.with_shell("picom -b --config ~/.config/awesome/picom/picom.conf")
-awful.spawn.once("nitrogen --restore")
+awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("setxkbmap -model pc105 -option 'grp:shifts_toggle,compose:sclk' 'us,us(intl)'")
