@@ -57,6 +57,7 @@ local browser = "firefox"
 local screenshot = "flameshot gui"
 local lock = "i3lock -c 000000 --no-unlock-indicator"
 local lock_lock = "xtrlock"
+local file_manager = "pcmanfm"
 
 local is_picom_running = function ()
     local result = io.popen("pgrep picom"):read("*l")
@@ -367,7 +368,13 @@ globalkeys = gears.table.join(
        awful.spawn(browser) end,
        {description = "launch browser", group = "launcher"}),
 
-    -- Lock screen
+  -- Launch browser
+    awful.key({ modkey }, "e", function ()
+       awful.spawn(file_manager) end,
+       {description = "launch file manager", group = "launcher"}),
+
+
+    -- Lock screen - Lock
     awful.key({ modkey, "Shift" }, "d", function ()
        awful.spawn(lock_lock) end,
        {description = "lock screen", group = "awesome"}),
@@ -381,6 +388,8 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "s", function ()
        awful.spawn("bash -c '" .. lock .. " && systemctl suspend'") end,
        {description = "suspend", group = "awesome"}),
+
+
 --[[
     awful.key({ modkey, "Control" }, "p", function ()
       awful.spawn("pkill picom") end,
