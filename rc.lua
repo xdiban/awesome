@@ -57,6 +57,11 @@ local browser = "firefox"
 local screenshot = "flameshot gui"
 local lock = "i3lock -c 000000 --no-unlock-indicator"
 local lock_lock = "xtrlock"
+
+local is_picom_running = function ()
+    local result = io.popen("pgrep picom"):read("*l")
+    return result ~= nil
+end
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -376,10 +381,26 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "s", function ()
        awful.spawn("bash -c '" .. lock .. " && systemctl suspend'") end,
        {description = "suspend", group = "awesome"}),
-
+--[[
     awful.key({ modkey, "Control" }, "p", function ()
       awful.spawn("pkill picom") end,
       {description = "kill picom", group = "awesome"})
+--]]
+
+  -- Define the function outside the key bindings
+
+-- Toggle Picom
+    awful.key({ modkey, "Control" }, "p", function ()
+      if is_picom_running() then
+        awful.spawn("pkill picom")
+        naughty.notify({text = "Picom stopped!"})
+      else
+        awful.spawn("picom")
+        naughty.notify({text = "Picom launched!"})
+      end
+    end,
+    {description = "toggle picom", group = "awesome"})
+
 )
 
 clientkeys = gears.table.join(
@@ -625,9 +646,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- Autostart
-awful.spawn.with_shell(
-    'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
-    'xrdb -merge <<< "awesome.started:true";' ..
-    -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
-    'dex --environment Awesome --autostart'
-    )
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
