@@ -399,7 +399,17 @@ globalkeys = gears.table.join(
         naughty.notify({text = "Picom launched!"})
       end
     end,
-    {description = "toggle picom", group = "awesome"})
+    {description = "toggle picom", group = "awesome"}),
+
+ -- Hide /show wibow
+  awful.key({ modkey }, "b",
+          function ()
+              myscreen = awful.screen.focused()
+              myscreen.mywibox.visible = not myscreen.mywibox.visible
+          end,
+          {description = "toggle statusbar"}
+  )
+
 
 )
 
