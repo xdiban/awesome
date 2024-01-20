@@ -408,9 +408,14 @@ globalkeys = gears.table.join(
               myscreen.mywibox.visible = not myscreen.mywibox.visible
           end,
           {description = "toggle statusbar"}
+  ),
+
+  awful.key({ modkey }, "m",
+      function ()
+          awful.spawn("blueman-manager")
+      end,
+      { description = "launch bluetooth manager", group = "applications" }
   )
-
-
 )
 
 clientkeys = gears.table.join(
