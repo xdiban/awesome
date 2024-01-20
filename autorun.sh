@@ -7,4 +7,5 @@ run() {
   fi
 }
 
-run "picom"
+run picom
+run setxkbmap -option "grp:shifts_toggle,compose:sclk" "us,us(intl)"
