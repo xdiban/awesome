@@ -57,7 +57,6 @@ local browser = "firefox"
 local screenshot = "flameshot gui"
 local lock = "i3lock -c 000000 --no-unlock-indicator"
 local lock_lock = "xtrlock"
-
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -376,7 +375,11 @@ globalkeys = gears.table.join(
     -- Suspend
     awful.key({ modkey, "Shift" }, "s", function ()
        awful.spawn("bash -c '" .. lock .. " && systemctl suspend'") end,
-       {description = "suspend", group = "awesome"})
+       {description = "suspend", group = "awesome"}),
+
+    awful.key({ modkey, "Control" }, "p", function ()
+      awful.spawn("pkill picom") end,
+      {description = "kill picom", group = "awesome"})
 )
 
 clientkeys = gears.table.join(
@@ -621,7 +624,10 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- Autostart applications:
-awful.spawn.with_shell("picom -b --config ~/.config/awesome/picom/picom.conf")
-awful.spawn.with_shell("setxkbmap -model pc105 -option 'grp:shifts_toggle,compose:sclk' 'us,us(intl)'")
-awful.spawn.once("nitrogen --restore")
+-- Autostart
+awful.spawn.with_shell(
+    'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
+    'xrdb -merge <<< "awesome.started:true";' ..
+    -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
+    'dex --environment Awesome --autostart'
+    )
