@@ -55,7 +55,7 @@ local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
 local browser = "firefox"
 local screenshot = "flameshot gui"
-local lock = "i3lock -c 000000 --no-unlock-indicator"
+local lock = "i3lock"
 local lock_lock = "xtrlock"
 local file_manager = "pcmanfm"
 
@@ -342,82 +342,87 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
-   -- Volume Keys
-   awful.key({}, "XF86AudioLowerVolume", function ()
-     awful.util.spawn("amixer -q -D pulse sset Master 5%-", false) end),
-   awful.key({}, "XF86AudioRaiseVolume", function ()
-     awful.util.spawn("amixer -q -D pulse sset Master 5%+", false) end),
-   awful.key({}, "XF86AudioMute", function ()
-     awful.util.spawn("amixer -D pulse set Master 1+ toggle", false) end),
+  -- Brightness Keys
+  awful.key({ }, "XF86MonBrightnessUp", function ()
+      awful.spawn("ddcutil setvcp 10 + 10")
+  end, {description = "brightness +10%", group = "hotkeys"}),
 
-     -- Media Keys
-   awful.key({}, "XF86AudioPlay", function()
-     awful.util.spawn("playerctl play-pause", false) end),
-   awful.key({}, "XF86AudioNext", function()
-     awful.util.spawn("playerctl next", false) end),
-   awful.key({}, "XF86AudioPrev", function()
-     awful.util.spawn("playerctl previous", false) end),
+  awful.key({ }, "XF86MonBrightnessDown", function ()
+      awful.spawn("ddcutil setvcp 10 - 10")
+  end, {description = "brightness -10%", group = "hotkeys"}),
 
+  -- Volume Keys
+  awful.key({}, "XF86AudioLowerVolume", function ()
+      awful.spawn("amixer -q -D pulse sset Master 5%-")
+  end, {description = "volume -5%", group = "hotkeys"}),
+
+  awful.key({}, "XF86AudioRaiseVolume", function ()
+      awful.spawn("amixer -q -D pulse sset Master 5%+")
+  end, {description = "volume +5%", group = "hotkeys"}),
+
+  awful.key({}, "XF86AudioMute", function ()
+      awful.spawn("amixer -D pulse set Master 1+ toggle")
+  end, {description = "toggle mute", group = "hotkeys"}),
+
+  -- Media Keys
+  awful.key({}, "XF86AudioPlay", function()
+      awful.spawn("playerctl play-pause")
+  end, {description = "play/pause", group = "hotkeys"}),
+
+  awful.key({}, "XF86AudioNext", function()
+      awful.spawn("playerctl next")
+  end, {description = "next track", group = "hotkeys"}),
+
+  awful.key({}, "XF86AudioPrev", function()
+      awful.spawn("playerctl previous")
+  end, {description = "previous track", group = "hotkeys"}),
     -- Screenshot
     awful.key({ }, "Print", function ()
-       awful.spawn(screenshot) end,
-       {description = "take screenshot", group = "launcher"}),
-
-    -- Launch browser
-    awful.key({ modkey }, "q", function ()
-       awful.spawn(browser) end,
-       {description = "launch browser", group = "launcher"}),
+      awful.spawn(screenshot)
+    end, {description = "take screenshot", group = "launcher"}),
 
   -- Launch browser
-    awful.key({ modkey }, "e", function ()
-       awful.spawn(file_manager) end,
-       {description = "launch file manager", group = "launcher"}),
+  awful.key({ modkey }, "q", function ()
+    awful.spawn(browser)
+  end, {description = "launch browser", group = "launcher"}),
 
+  -- Launch file manager
+  awful.key({ modkey }, "e", function ()
+    awful.spawn(file_manager)
+  end, {description = "launch file manager", group = "launcher"}),
 
-    -- Lock screen - Lock
-    awful.key({ modkey, "Shift" }, "d", function ()
-       awful.spawn(lock_lock) end,
-       {description = "lock screen", group = "awesome"}),
+  -- Lock screen - Lock
+  awful.key({ modkey, "Shift" }, "d", function ()
+    awful.spawn(lock_lock)
+  end, {description = "lock screen", group = "awesome"}),
 
-    -- Lock screen
-    awful.key({ modkey, "Shift" }, "f", function ()
-       awful.spawn(lock) end,
-       {description = "lock screen", group = "awesome"}),
+  -- Lock screen
+  awful.key({ modkey, "Shift" }, "f", function ()
+    awful.spawn(lock)
+  end, {description = "lock screen", group = "awesome"}),
 
-    -- Suspend
-    awful.key({ modkey, "Shift" }, "s", function ()
-       awful.spawn("bash -c '" .. lock .. " && systemctl suspend'") end,
-       {description = "suspend", group = "awesome"}),
+  -- Suspend
+  awful.key({ modkey, "Shift" }, "s", function ()
+    awful.spawn("bash -c '" .. lock .. " && systemctl suspend'")
+  end, {description = "suspend", group = "awesome"}),
 
+  -- Toggle Picom
+  awful.key({ modkey, "Control" }, "p", function ()
+    if is_picom_running() then
+      awful.spawn("pkill picom")
+      naughty.notify({text = "Picom stopped!"})
+    else
+      awful.spawn("picom")
+      naughty.notify({text = "Picom launched!"})
+    end
+  end, {description = "toggle picom", group = "awesome"}),
 
---[[
-    awful.key({ modkey, "Control" }, "p", function ()
-      awful.spawn("pkill picom") end,
-      {description = "kill picom", group = "awesome"})
---]]
+  -- Hide/show statusbar
+  awful.key({ modkey }, "b", function ()
+    local myscreen = awful.screen.focused()
+    myscreen.mywibox.visible = not myscreen.mywibox.visible
+  end, {description = "toggle statusbar"})
 
-  -- Define the function outside the key bindings
-
--- Toggle Picom
-    awful.key({ modkey, "Control" }, "p", function ()
-      if is_picom_running() then
-        awful.spawn("pkill picom")
-        naughty.notify({text = "Picom stopped!"})
-      else
-        awful.spawn("picom")
-        naughty.notify({text = "Picom launched!"})
-      end
-    end,
-    {description = "toggle picom", group = "awesome"}),
-
- -- Hide /show wibow
-  awful.key({ modkey }, "b",
-          function ()
-              myscreen = awful.screen.focused()
-              myscreen.mywibox.visible = not myscreen.mywibox.visible
-          end,
-          {description = "toggle statusbar"}
-  )
 )
 
 clientkeys = gears.table.join(
