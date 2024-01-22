@@ -63,20 +63,6 @@ local is_picom_running = function ()
     local result = io.popen("pgrep picom"):read("*l")
     return result ~= nil
 end
-
-local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
-
-s.mytasklist, -- Middle widget
-	{ -- Right widgets
-    	layout = wibox.layout.fixed.horizontal,
-        ...
-        -- default
-        volume_widget(),
-        -- customized
-        volume_widget{
-            widget_type = 'arc'
-        },
-
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -132,8 +118,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
-
-
 
 -- {{{ Wibar
 -- Create a textclock widget
