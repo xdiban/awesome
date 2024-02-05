@@ -22,3 +22,6 @@ run lxsession
 #Redshift + Location
 run /usr/lib/geoclue-2.0/demos/agent
 run redshift-gtk
+
+#Flameshot
+run flameshot
