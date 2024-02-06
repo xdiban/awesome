@@ -346,12 +346,14 @@ globalkeys = gears.table.join(
 
   -- Brightness Keys
   awful.key({ }, "XF86MonBrightnessUp", function ()
-      awful.spawn("ddcutil setvcp 10 + 10")
-  end, {description = "brightness +10%", group = "hotkeys"}),
+      awful.spawn("ddcutil setvcp 10 + 5")
+      --awful.spawn("brightnessctl set +5%")
+  end, {description = "brightness +5%", group = "hotkeys"}),
 
   awful.key({ }, "XF86MonBrightnessDown", function ()
-      awful.spawn("ddcutil setvcp 10 - 10")
-  end, {description = "brightness -10%", group = "hotkeys"}),
+      awful.spawn("ddcutil setvcp 10 - 5")
+      --awful.spawn("brightnessctl set 5-%")
+  end, {description = "brightness -5%", group = "hotkeys"}),
 
   -- Volume Keys
   awful.key({}, "XF86AudioLowerVolume", function ()

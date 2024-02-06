@@ -7,7 +7,13 @@ sudo pacman -Sy archlinux-keyring
 yay -Syu
 
 ##Install dependencies
-yay -S zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep
+yay -S zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utilsbrightnessctl
+
+##Laptop brightness
+yay -S brightnessctl
+
+##External monitor brightness
+yay -s ddcutil
 
 ##Systemctl services
 sudo systemctl enable --now geoclue.service
@@ -24,3 +30,5 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
 ln -sf ~/.config/kitty/kitty-themes/themes/IR_Black.conf ~/.config/kitty/theme.conf
 
+1. Add this to kitty.conf
+include ./theme.conf
