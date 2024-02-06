@@ -25,3 +25,6 @@ run redshift-gtk
 
 #Flameshot
 run flameshot
+
+#Power management
+run xfce4-power-management
