@@ -31,3 +31,6 @@ run xfce4-power-management
 
 #Network manager applet
 run nm-applet
+
+#Bluetooth applet
+run blueman-applet
