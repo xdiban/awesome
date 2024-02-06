@@ -14,4 +14,5 @@ sudo systemctl enable --now geoclue.service
 sudo systemctl enable --now bluetooth.service
 
 #Picom config
+mkdir ~/.config/picom
 ln -s ~/.config/awesome/conf/picom.conf ~/.config/picom/picom.config 
