@@ -22,5 +22,5 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 
 ##Install Kitty Themes
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
-ln -sf ~/.config/kitty/kitty-themes/themes/IR_Black.conf ~/.config/kitty/theme.conf                                            21:21:53
+ln -sf ~/.config/kitty/kitty-themes/themes/IR_Black.conf ~/.config/kitty/theme.conf
 
