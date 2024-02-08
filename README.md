@@ -36,7 +36,7 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ```
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
 ln -sf ~/.config/kitty/kitty-themes/themes/IR_Black.conf ~/.config/kitty/theme.conf
-echo include ./theme.conf > ~/.kitty.conf
+echo include ./theme.conf > ~/.config/kitty/kitty.conf
 ```
 
 ## Configure lxappearance
