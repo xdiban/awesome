@@ -7,13 +7,7 @@ sudo pacman -Sy archlinux-keyring
 yay -Syu
 
 ##Install dependencies
-yay -S zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utilsbrightnessctl
-
-##Laptop brightness
-yay -S brightnessctl
-
-##External monitor brightness
-yay -s ddcutil
+yay -S zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utils brightnessctl ddcutil
 
 ##Systemctl services
 sudo systemctl enable --now geoclue.service
