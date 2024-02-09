@@ -12,7 +12,7 @@ yay -Syu
 
 ## Install dependencies
 ```
-yay -S npm zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utils brightnessctl ddcutil geoclue lxappearrance xclip neofetch -y
+yay -S npm zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utils brightnessctl ddcutil geoclue lxappearrance xclip neofetch xf86-input-synaptics -y
 ```
 
 ## Systemctl services
@@ -23,8 +23,7 @@ sudo systemctl enable --now bluetooth.service
 
 ## Picom config
 ```
-mkdir ~/.config/picom
-ln -s ~/.config/awesome/conf/picom.conf ~/.config/picom/picom.config
+mkdir ~/.config/picom && ln -sf ~/.config/awesome/conf/picom.conf ~/.config/picom/picom.config
 ```
 
 ## Install NvChad
@@ -50,4 +49,9 @@ chsh -s $(which zsh)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file#option-3-install-script
 ./install.sh
+```
+
+## Synaptics config
+```
+sudo cp ~/.config/awesome/conf/synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 ```
