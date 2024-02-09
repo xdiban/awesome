@@ -1,0 +1,6 @@
+if [ -d "/proc/acpi/button/lid" ]; then
+    echo "Computer is a laptop"
+else
+    echo "Computer is not a laptop (possibly a desktop)"
+fi
+
