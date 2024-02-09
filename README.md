@@ -12,7 +12,7 @@ yay -Syu
 
 ## Install dependencies
 ```
-yay -S npm zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utils brightnessctl ddcutil geoclue lxappearrance xclip neofetch xf86-input-synaptics -y
+yay -S npm zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utils brightnessctl ddcutil geoclue lxappearrance xclip neofetch xf86-input-synaptics acpi -y
 ```
 
 ## Systemctl services
@@ -55,3 +55,8 @@ https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file#option-3-install-scri
 ```
 sudo cp ~/.config/awesome/conf/synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 ```
+
+## Install ARC Icon Theme
+git clone https://github.com/horst3180/arc-icon-theme --depth 1 && cd arc-icon-theme
+./autogen.sh --prefix=/usr
+sudo make install
