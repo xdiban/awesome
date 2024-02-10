@@ -15,7 +15,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Check Laptop
-local is_laptop = (os.execute("[ -d \"/proc/acpi/button/lid\" ]") == 0) and true or false
+local is_laptop = os.execute("test -d \"/proc/acpi/button/lid\"") == 0
 
 if is_laptop then
   naughty.notify({
