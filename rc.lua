@@ -15,16 +15,9 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Check Laptop
-function isLaptop()
-    local command = "test -d /proc/acpi/button/lid && echo 'Laptop' || echo 'Not a laptop'"
-    local handle = io.popen(command)
-    local result = handle:read("*a")
-    handle:close()
+local is_laptop = (os.execute("[ -d \"/proc/acpi/button/lid\" ]") == 0) and true or false
 
-    return result:match("Laptop") ~= nil
-end
-
-if isLaptop() then
+if is_laptop then
   naughty.notify({
       title = "Laptop Notification",
       text = "This is a notification for a laptop!",
