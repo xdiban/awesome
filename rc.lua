@@ -14,25 +14,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Check Laptop
-local is_laptop = os.execute("test -d \"/proc/acpi/button/lid\"") and true or false
-
-if is_laptop then
-  naughty.notify({
-      title = "Laptop Notification",
-      text = "This is a notification for a laptop!",
-      timeout = 5,
-      position = "top_right"
-  })
-else
-  naughty.notify({
-      title = "Desktop Notification",
-      text = "This is a notification for a desktop!",
-      timeout = 5,
-      position = "top_right"
-  })
-end
-
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -82,6 +63,29 @@ local is_picom_running = function ()
     local result = io.popen("pgrep picom"):read("*l")
     return result ~= nil
 end
+
+-- Check Laptop
+local is_laptop = os.execute("test -d \"/proc/acpi/button/lid\"") and true or false
+
+if is_laptop then
+  naughty.notify({
+      title = "Laptop Notification",
+      text = "This is a notification for a laptop!",
+      timeout = 5,
+      position = "top_right"
+  })
+else
+  naughty.notify({
+      title = "Desktop Notification",
+      text = "This is a notification for a desktop!",
+      timeout = 5,
+      position = "top_right"
+  })
+end
+
+local brightness_inc_cmd = is_laptop and "brightnessctl set +5%" or "ddcutil setvcp 10 + 10"
+local brightness_dec_cmd = is_laptop and "brightnessctl set -5%" or "ddcutil setvcp 10 - 5"
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -368,25 +372,42 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
+
+-- Brightness Keys
+awful.key({ }, "XF86MonBrightnessUp", function ()
+  awful.spawn(brightness_inc_cmd)
+end, {description = "brightness +", group = "hotkeys"}),
+
+awful.key({ }, "XF86MonBrightnessDown", function ()
+  awful.spawn(brightness_dec_cmd)
+end, {description = "brightness -", group = "hotkeys"}),
+
+--[[
   -- Brightness Keys
   awful.key({ }, "XF86MonBrightnessUp", function ()
-      awful.spawn("ddcutil setvcp 10 + 5")
-      --awful.spawn("brightnessctl set +5%")
+    awful.spawn("ddcutil setvcp 10 + 10")
+  end, {description = "brightness +10%", group = "hotkeys"}),
+
+  awful.key({ }, "XF86MonBrightnessDown", function ()
+    awful.spawn("ddcutil setvcp 10 - 5")
+  end, {description = "brightness -10%", group = "hotkeys"}),
+
+  awful.key({ }, "XF86MonBrightnessUp", function ()
+    awful.spawn("brightnessctl set +5%")
   end, {description = "brightness +5%", group = "hotkeys"}),
 
   awful.key({ }, "XF86MonBrightnessDown", function ()
-      awful.spawn("ddcutil setvcp 10 - 5")
-      --awful.spawn("brightnessctl set 5-%")
+    awful.spawn("brightnessctl set 5-%")
   end, {description = "brightness -5%", group = "hotkeys"}),
-
+]]
   -- Volume Keys
   awful.key({}, "XF86AudioLowerVolume", function ()
       awful.spawn("amixer -q -D pulse sset Master 5%-")
-  end, {description = "volume -5%", group = "hotkeys"}),
+  end, {description = "volume -", group = "hotkeys"}),
 
   awful.key({}, "XF86AudioRaiseVolume", function ()
       awful.spawn("amixer -q -D pulse sset Master 5%+")
-  end, {description = "volume +5%", group = "hotkeys"}),
+  end, {description = "volume +", group = "hotkeys"}),
 
   awful.key({}, "XF86AudioMute", function ()
       awful.spawn("amixer -D pulse set Master 1+ toggle")
