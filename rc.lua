@@ -14,6 +14,25 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+-- Check Laptop
+local islaptop = os.execute("[ -d '/proc/acpi/button/lid' ]") == 0   
+
+if islaptop then
+  naughty.notify({
+      title = "Laptop Notification",
+      text = "This is a notification for a laptop!",
+      timeout = 5,
+      position = "top_right"
+  })
+else
+  naughty.notify({
+      title = "Desktop Notification",
+      text = "This is a notification for a desktop!",
+      timeout = 5,
+      position = "top_right"
+  })
+end
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
