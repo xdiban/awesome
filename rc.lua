@@ -141,12 +141,11 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 
 -- Widgets
-local cmus_widget = require('awesome-wm-widgets.cmus-widget.cmus')
 local pacman_widget = require('awesome-wm-widgets.pacman-widget.pacman')
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-
-
+local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -256,12 +255,13 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            cmus_widget(),
             mykeyboardlayout,
-            wibox.widget.systray(),
             pacman_widget(),
+            net_speed_widget(),
             cpu_widget(),
             (is_laptop and batteryarc_widget() or nil),
+            wibox.widget.systray(),
+            logout_menu_widget(),
             mytextclock,
             s.mylayoutbox,
         },
