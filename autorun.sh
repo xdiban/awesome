@@ -8,7 +8,7 @@ run() {
 }
 
 #volumeicon
-run volctl
+#run volctl
 
 #Compositor
 run picom
