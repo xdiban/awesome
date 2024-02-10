@@ -16,7 +16,7 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Check Laptop
 function isLaptop()
-    local command = "[ -d \"/proc/acpi/button/lid\" ] && echo \"Laptop\" || echo \"Not a laptop\""
+    local command = "test -d /proc/acpi/button/lid && echo 'Laptop' || echo 'Not a laptop'"
     local handle = io.popen(command)
     local result = handle:read("*a")
     handle:close()
