@@ -146,7 +146,6 @@ local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batterya
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
-local volume_widget = require('awesome-wm-widgets.pactl-widget.volume')
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -261,7 +260,6 @@ awful.screen.connect_for_each_screen(function(s)
             net_speed_widget(),
             cpu_widget(),
             (is_laptop and batteryarc_widget() or nil),
-            volume_widget(),
             wibox.widget.systray(),
             logout_menu_widget(),
             mytextclock,
