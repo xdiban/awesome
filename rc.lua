@@ -143,7 +143,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Widgets
 local cmus_widget = require('awesome-wm-widgets.cmus-widget.cmus')
 local pacman_widget = require('awesome-wm-widgets.pacman-widget.pacman')
-local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 
 
@@ -261,7 +261,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
             pacman_widget(),
             cpu_widget(),
-            (is_laptop and battery_widget() or nil),
+            (is_laptop and batteryarc_widget() or nil),
             mytextclock,
             s.mylayoutbox,
         },
