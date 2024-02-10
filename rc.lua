@@ -84,7 +84,7 @@ else
 end
 
 local brightness_inc_cmd = is_laptop and "brightnessctl set +5%" or "ddcutil setvcp 10 + 10"
-local brightness_dec_cmd = is_laptop and "brightnessctl set -5%" or "ddcutil setvcp 10 - 5"
+local brightness_dec_cmd = is_laptop and "brightnessctl set 5%-" or "ddcutil setvcp 10 - 5"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
