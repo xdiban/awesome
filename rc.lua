@@ -213,7 +213,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9",}, s, awful.layout.layouts[1])
+    awful.tag({ "一", "二", "三", "四", "五", "六" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     -- s.mypromptbox = awful.widget.prompt()
@@ -253,14 +253,14 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout, 
-            cpu_widget(),
-            net_speed_widget(),
-            mytextclock,
-            wibox.widget.systray(),
-            (is_laptop and batteryarc_widget() or nil),
-            s.mylayoutbox,
+          layout = wibox.layout.fixed.horizontal,
+          wibox.widget.systray(),
+          mykeyboardlayout,
+          cpu_widget(),
+          net_speed_widget(),
+          (is_laptop and batteryarc_widget() or nil),
+          mytextclock,
+          s.mylayoutbox,
         },
     }
 
@@ -453,7 +453,7 @@ end, {description = "brightness -", group = "hotkeys"}),
   -- Lock screen - Lock
   awful.key({ modkey, "Shift" }, "d", function ()
     awful.spawn(lock_lock)
-  end, {description = "lock screen", group = "awesome"}),
+  end, {description = "lock (lock) screen", group = "awesome"}),
 
   -- Lock screen
   awful.key({ modkey, "Shift" }, "f", function ()
@@ -480,7 +480,7 @@ end, {description = "brightness -", group = "hotkeys"}),
   awful.key({ modkey }, "b", function ()
     local myscreen = awful.screen.focused()
     myscreen.mywibox.visible = not myscreen.mywibox.visible
-  end, {description = "toggle statusbar"})
+  end, {description = "toggle statusbar", group = "awesome"})
 
 )
 
