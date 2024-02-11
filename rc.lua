@@ -66,7 +66,7 @@ end
 
 -- Check Laptop
 local is_laptop = os.execute("test -d \"/proc/acpi/button/lid\"") and true or false
-
+--[[
 if is_laptop then
   naughty.notify({
       title = "Laptop Notification",
@@ -82,6 +82,7 @@ else
       position = "top_right"
   })
 end
+]]
 
 local brightness_inc_cmd = is_laptop and "brightnessctl set +5%" or "ddcutil setvcp 10 + 10"
 local brightness_dec_cmd = is_laptop and "brightnessctl set 5%-" or "ddcutil setvcp 10 - 10"
@@ -116,8 +117,8 @@ awful.layout.layouts = {
 -- }}}
 
 -- {{{ Menu
--- Create a launcher widget and a main menu
-
+-- Create a launcher widget and a main menu_submenu_icon
+--[[
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
@@ -130,7 +131,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", terminal }
                                   }
                         })
-
+--]]
 --[[                       
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -141,11 +142,9 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 
 -- Widgets
-local pacman_widget = require('awesome-wm-widgets.pacman-widget.pacman')
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -217,7 +216,7 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9",}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
+    -- s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -250,18 +249,16 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
-            s.mypromptbox,
+            --s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            pacman_widget(),
+            wibox.widget.systray(),
             net_speed_widget(),
             cpu_widget(),
             (is_laptop and batteryarc_widget() or nil),
-            wibox.widget.systray(),
-            logout_menu_widget(),
             mytextclock,
             s.mylayoutbox,
         },
@@ -271,6 +268,7 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 -- }}}
 
+--[[
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -278,6 +276,7 @@ root.buttons(gears.table.join(
     awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
+]]
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
@@ -363,8 +362,11 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey },            "r",     function () awful.spawn.with_shell("rofi -show run") end,
+              {description = "show list of commands", group = "launcher"}),
+    
+    awful.key({ modkey },            "t",     function () awful.spawn.with_shell("rofi -show window") end,
+              {description = "switch between windows", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -377,8 +379,8 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey }, "p", function() awful.spawn.with_shell("rofi -show drun") end,
+              {description = "show the list of apps", group = "launcher"}),
 
 
 -- Brightness Keys
