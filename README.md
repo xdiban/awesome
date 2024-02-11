@@ -57,6 +57,13 @@ sudo cp ~/.config/awesome/conf/synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.
 ```
 
 ## Install ARC Icon Theme
+```
 git clone https://github.com/horst3180/arc-icon-theme --depth 1 && cd arc-icon-theme
 ./autogen.sh --prefix=/usr
 sudo make install
+```
+
+## Rofi Config
+```
+ln -sf ~/.config/awesome/conf/rofi/config.rasi ~/.config/rofi/config.rasi
+```

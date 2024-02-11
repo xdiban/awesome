@@ -14,7 +14,7 @@ run volctl
 run picom
 
 #Layouts
-run setxkbmap -option "grp:shifts_toggle,compose:sclk" -layout "us,us(intl)"
+run setxkbmap -layout "us,us(intl)"
 
 #Authentication agent
 run lxsession

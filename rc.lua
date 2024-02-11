@@ -52,7 +52,7 @@ beautiful.init(theme_path)
 -- This is used later as the default terminal and editor to run.
 local terminal = "kitty"
 local editor = os.getenv("EDITOR") or "nvim"
-local editor_cmd = terminal .. " -e " .. editor
+--local editor_cmd = terminal .. " -e " .. editor
 local browser = "firefox"
 local screenshot = "flameshot gui"
 local lock = "betterlockscreen --lock"
@@ -93,6 +93,7 @@ local brightness_dec_cmd = is_laptop and "brightnessctl set 5%-" or "ddcutil set
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+altkey = "Mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -320,9 +321,10 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
+    --[[
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
-
+    ]]
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
@@ -401,34 +403,15 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() awful.spawn.with_shell("rofi -show drun") end,
               {description = "show the list of apps", group = "launcher"}),
 
-
--- Brightness Keys
-awful.key({ }, "XF86MonBrightnessUp", function ()
-  awful.spawn(brightness_inc_cmd)
-end, {description = "brightness +", group = "hotkeys"}),
-
-awful.key({ }, "XF86MonBrightnessDown", function ()
-  awful.spawn(brightness_dec_cmd)
-end, {description = "brightness -", group = "hotkeys"}),
-
---[[
   -- Brightness Keys
   awful.key({ }, "XF86MonBrightnessUp", function ()
-    awful.spawn("ddcutil setvcp 10 + 10")
-  end, {description = "brightness +10%", group = "hotkeys"}),
+    awful.spawn(brightness_inc_cmd)
+  end, {description = "brightness +", group = "hotkeys"}),
 
   awful.key({ }, "XF86MonBrightnessDown", function ()
-    awful.spawn("ddcutil setvcp 10 - 5")
-  end, {description = "brightness -10%", group = "hotkeys"}),
+    awful.spawn(brightness_dec_cmd)
+  end, {description = "brightness -", group = "hotkeys"}),
 
-  awful.key({ }, "XF86MonBrightnessUp", function ()
-    awful.spawn("brightnessctl set +5%")
-  end, {description = "brightness +5%", group = "hotkeys"}),
-
-  awful.key({ }, "XF86MonBrightnessDown", function ()
-    awful.spawn("brightnessctl set 5-%")
-  end, {description = "brightness -5%", group = "hotkeys"}),
-]]
   -- Volume Keys
   awful.key({}, "XF86AudioLowerVolume", function ()
       awful.spawn("amixer -q -D pulse sset Master 5%-")
@@ -460,7 +443,7 @@ end, {description = "brightness -", group = "hotkeys"}),
     end, {description = "take screenshot", group = "launcher"}),
 
   -- Launch browser
-  awful.key({ modkey }, "q", function ()
+  awful.key({ modkey }, "w", function ()
     awful.spawn(browser)
   end, {description = "launch browser", group = "launcher"}),
 
@@ -499,7 +482,12 @@ end, {description = "brightness -", group = "hotkeys"}),
   awful.key({ modkey }, "b", function ()
     local myscreen = awful.screen.focused()
     myscreen.mywibox.visible = not myscreen.mywibox.visible
-  end, {description = "toggle statusbar", group = "awesome"})
+  end, {description = "toggle statusbar", group = "awesome"}),
+
+  -- Layout
+  awful.key({ altkey }, "Shift_L", function ()
+    mykeyboardlayout.next_layout();
+  end, {description = "next keyboard layout", group = "awesome"})
 
 )
 
