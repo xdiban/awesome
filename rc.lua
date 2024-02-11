@@ -55,7 +55,7 @@ local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
 local browser = "firefox"
 local screenshot = "flameshot gui"
-local lock = "i3lock"
+local lock = "betterlockscreen --lock"
 local lock_lock = "xtrlock"
 local file_manager = "pcmanfm"
 
@@ -151,7 +151,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock(" %Y-%m-%d %a %H:%M ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -254,12 +254,12 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            net_speed_widget(),
+            mykeyboardlayout, 
             cpu_widget(),
-            (is_laptop and batteryarc_widget() or nil),
+            net_speed_widget(),
             mytextclock,
+            wibox.widget.systray(),
+            (is_laptop and batteryarc_widget() or nil),
             s.mylayoutbox,
         },
     }
