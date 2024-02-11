@@ -213,8 +213,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "一", "二", "三", "四", "五", "六" }, s, awful.layout.layouts[1])
-
+    awful.tag({ "一", "二", "三", "四", "五", "六", "七", "八", "九" }, s, awful.layout.layouts[1])
     -- Create a promptbox for each screen
     -- s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -236,8 +235,26 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+        widget_template = {
+            {
+                {
+                    {
+                        id = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                margins = 4,
+                widget = wibox.container.margin,
+            },
+            widget = wibox.container.background,
+            create_callback = function(self, c, index, objects) --luacheck: no unused args
+                self:get_children_by_id('text_role')[1].markup = '<b>' .. c.name .. '</b>'
+            end,
+        },
     }
+
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
