@@ -44,7 +44,9 @@ lxappearance
 ```
 
 ## Configure sleep and lock
-
+```
+xfconf-query --create -c xfce4-session -p /general/LockCommand -t string -s "betterlockscreen --lock"
+```
 
 ## Install zsh and extentions
 ```
