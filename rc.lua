@@ -238,23 +238,6 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
-        widget_template = {
-            {
-                {
-                    {
-                        id = 'text_role',
-                        widget = wibox.widget.textbox,
-                    },
-                    layout = wibox.layout.fixed.horizontal,
-                },
-                margins = 4,
-                widget = wibox.container.margin,
-            },
-            widget = wibox.container.background,
-            create_callback = function(self, c, index, objects) --luacheck: no unused args
-                self:get_children_by_id('text_role')[1].markup = '<b>' .. c.name .. '</b>'
-            end,
-        },
     }
 
 
