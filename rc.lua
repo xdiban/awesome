@@ -66,26 +66,28 @@ end
 
 -- Check Laptop
 local is_laptop = os.execute("test -d \"/proc/acpi/button/lid\"") and true or false
---[[
-if is_laptop then
-  naughty.notify({
-      title = "Laptop Notification",
-      text = "This is a notification for a laptop!",
-      timeout = 5,
-      position = "top_right"
-  })
-else
-  naughty.notify({
-      title = "Desktop Notification",
-      text = "This is a notification for a desktop!",
-      timeout = 5,
-      position = "top_right"
-  })
-end
-]]
 
 local brightness_inc_cmd = is_laptop and "brightnessctl set +5%" or "ddcutil setvcp 10 + 10"
 local brightness_dec_cmd = is_laptop and "brightnessctl set 5%-" or "ddcutil setvcp 10 - 10"
+
+-- Function to switch between headphone and speaker ports
+function switchAudioPort(port)
+    awful.spawn.easy_async(string.format("pactl set-sink-port 0 %s", port), function(_, stderr)
+        if stderr and not stderr:match("^$") then
+            naughty.notify({
+                preset = naughty.config.presets.critical,
+                title = "Audio Port Switch",
+                text = "Failed to switch audio port",
+            })
+        else
+            naughty.notify({
+                preset = naughty.config.presets.normal,
+                title = "Audio Port Switch",
+                text = string.format("Switched to %s", port),
+            })
+        end
+    end)
+end
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -470,7 +472,14 @@ globalkeys = gears.table.join(
   -- Layout
   awful.key({ altkey }, "Shift_L", function ()
     mykeyboardlayout.next_layout();
-  end, {description = "next keyboard layout", group = "awesome"})
+  end, {description = "next keyboard layout", group = "awesome"}),
+
+-- Key bindings
+awful.key({ altkey }, "h", function () switchAudioPort("analog-output-headphones") end,
+    { description = "Switch to headphones", group = "audio" }),
+
+awful.key({ altkey }, "s", function () switchAudioPort("analog-output-lineout") end,
+    { description = "Switch to speakers", group = "audio" })
 
 )
 
