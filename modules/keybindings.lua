@@ -3,6 +3,23 @@ local awful = require("awful")
 local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
+local variables = require("modules.variables")
+
+local modkey = variables.modkey
+local altkey = variables.altkey
+
+-- Standard awesome library
+local gears = require("gears")
+local awful = require("awful")
+require("awful.autofocus")
+-- Widget and layout library
+local wibox = require("wibox")
+-- Theme handling library
+local beautiful = require("beautiful")
+-- Notification library
+local naughty = require("naughty")
+local menubar = require("menubar")
+local hotkeys_popup = require("awful.hotkeys_popup")
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
@@ -144,11 +161,11 @@ globalkeys = gears.table.join(
 
   -- Brightness Keys
   awful.key({ }, "XF86MonBrightnessUp", function ()
-    awful.spawn(brightness_inc_cmd)
+    awful.spawn(variables.brightness_inc_cmd)
   end, {description = "brightness +", group = "hotkeys"}),
 
   awful.key({ }, "XF86MonBrightnessDown", function ()
-    awful.spawn(brightness_dec_cmd)
+    awful.spawn(variables.brightness_dec_cmd)
   end, {description = "brightness -", group = "hotkeys"}),
 
   -- Volume Keys
@@ -178,32 +195,32 @@ globalkeys = gears.table.join(
   end, {description = "previous track", group = "hotkeys"}),
     -- Screenshot
     awful.key({ }, "Print", function ()
-      awful.spawn(screenshot)
+      awful.spawn(variables.screenshot)
     end, {description = "take screenshot", group = "launcher"}),
 
   -- Launch browser
   awful.key({ modkey }, "w", function ()
-    awful.spawn(browser)
+    awful.spawn(variables.browser)
   end, {description = "launch browser", group = "launcher"}),
 
   -- Launch file manager
   awful.key({ modkey }, "e", function ()
-    awful.spawn(file_manager)
+    awful.spawn(variables.file_manager)
   end, {description = "launch file manager", group = "launcher"}),
 
   -- Lock screen - Lock
   awful.key({ modkey, "Shift" }, "d", function ()
-    awful.spawn(lock_lock)
+    awful.spawn(variables.lock_lock)
   end, {description = "lock (lock) screen", group = "awesome"}),
 
   -- Lock screen
   awful.key({ modkey, "Shift" }, "f", function ()
-    awful.spawn(lock)
+    awful.spawn(variables.lock)
   end, {description = "lock screen", group = "awesome"}),
 
   -- Suspend
   awful.key({ modkey, "Shift" }, "s", function ()
-    awful.spawn("bash -c '" .. lock .. " && systemctl suspend'")
+    awful.spawn("bash -c '" .. variables.lock .. " && systemctl suspend'")
   end, {description = "suspend", group = "awesome"}),
 
   -- Toggle Picom

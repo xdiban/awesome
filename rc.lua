@@ -18,6 +18,10 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+
+local variables = require("modules.variables")
+awful.layout.layouts = variables.awful.layout.layouts
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -46,110 +50,15 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "hyper")
-beautiful.init(theme_path)
+local variables = require("modules.variables")
+beautiful.init(variables.theme_path)
 
--- This is used later as the default terminal and editor to run.
-local terminal = "kitty"
-local editor = os.getenv("EDITOR") or "nvim"
---local editor_cmd = terminal .. " -e " .. editor
-local browser = "firefox"
-local screenshot = "flameshot gui"
-local lock = "betterlockscreen --lock"
-local lock_lock = "xtrlock"
-local file_manager = "pcmanfm"
-
-local is_picom_running = function ()
-    local result = io.popen("pgrep picom"):read("*l")
-    return result ~= nil
-end
-
--- Check Laptop
-local is_laptop = os.execute("test -d \"/proc/acpi/button/lid\"") and true or false
-
-local brightness_inc_cmd = is_laptop and "brightnessctl set +5%" or "ddcutil setvcp 10 + 10"
-local brightness_dec_cmd = is_laptop and "brightnessctl set 5%-" or "ddcutil setvcp 10 - 10"
-
--- Function to switch between headphone and speaker ports
-function switchAudioPort(port)
-    awful.spawn.easy_async(string.format("pactl set-sink-port 0 %s", port), function(_, stderr)
-        if stderr and not stderr:match("^$") then
-            naughty.notify({
-                preset = naughty.config.presets.critical,
-                title = "Audio Port Switch",
-                text = "Failed to switch audio port",
-            })
-        else
-            naughty.notify({
-                preset = naughty.config.presets.normal,
-                title = "Audio Port Switch",
-                text = string.format("Switched to %s", port),
-            })
-        end
-    end)
-end
-
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
-altkey = "Mod1"
-
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {
-    awful.layout.suit.tile,
-    --awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier,
-    --awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
-    awful.layout.suit.floating,
-
-}
 -- }}}
-
--- {{{ Menu
--- Create a launcher widget and a main menu_submenu_icon
---[[
-myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
---]]
---[[                       
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
---]]
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
 
 -- Widgets
-local lain = require("lain")
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-local volume_widget = require('awesome-wm-widgets.pactl-widget.volume')
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
