@@ -1,0 +1,17 @@
+[Ocean]
+text               = #e9e4d7
+subtext            = #daa58d
+main               = #171624
+sidebar            = #171624
+player             = #171624
+card               = #15121d
+shadow             = #171624
+selected-row       = #daa58d
+button             = #c45075
+button-active      = #daa58d
+button-disabled    = #65597f
+tab-active         = #c45075
+notification       = #15121d
+notification-error = #c45075
+misc               = #15121d
+
