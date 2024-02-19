@@ -14,10 +14,10 @@ local theme = {}
 theme.font          = "roboto 8"
 
 -- Palette colors
-theme.bg_normal     = "#3a2546"
+theme.bg_normal     = "#15121d"
 theme.bg_focus      = "#a33b69"
-theme.bg_urgent     = "#b7d396"
-theme.bg_minimize   = "#f188c9"
+theme.bg_urgent     = "#add97a"
+theme.bg_minimize   = "#e96eb4"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#e9e4d7"
@@ -28,7 +28,7 @@ theme.fg_minimize   = "#152121"
 theme.useless_gap   = dpi(5)
 theme.border_width  = dpi(1)
 theme.border_normal = "#15121d"
-theme.border_focus  = "#b7d396"
+theme.border_focus  = "#add97a"
 theme.border_marked = "#a33b69"
 
 
