@@ -149,4 +149,4 @@ icon-theme: "Papirus-dark";
       sorting-method:    "name";
   }
 }
-@theme "~/.config/awesome/conf/rofi/squared-nord.rasi"
+@theme "~/.config/awesome/conf/rofi/evangelion.rasi"
