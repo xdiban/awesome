@@ -12,8 +12,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -25,26 +23,11 @@ awful.layout.layouts = variables.awful.layout.layouts
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
+local error_handling = require("modules.error-handling")
 
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = tostring(err) })
-        in_error = false
-    end)
-end
+-- Call the error handling functions
+error_handling.handle_startup_errors()
+error_handling.handle_runtime_errors()
 -- }}}
 
 -- {{{ Variable definitions
@@ -149,23 +132,11 @@ awful.screen.connect_for_each_screen(function(s)
       screen  = s,
       filter  = awful.widget.tasklist.filter.currenttags,
       buttons = tasklist_buttons,
-      widget_template = {
-          {
-              {
-                  id     = 'text_role',
-                  widget = wibox.widget.textbox,
-              },
-              layout = wibox.layout.fixed.horizontal,
-          },
-        left  = 5,
-        right = 5,
-        widget = wibox.container.margin,
-      },
   }
 
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 20 })
+    s.mywibox = awful.wibar({ position = "top", screen = s})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
