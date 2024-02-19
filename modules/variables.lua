@@ -14,7 +14,7 @@ M.browser = "firefox"
 M.screenshot = "flameshot gui"
 M.lock = "betterlockscreen --lock"
 M.lock_lock = "xtrlock"
-M.ile_manager = "pcmanfm"
+M.file_manager = "pcmanfm"
 
 M.is_picom_running = function ()
     local result = io.popen("pgrep picom"):read("*l")

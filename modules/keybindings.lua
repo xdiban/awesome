@@ -102,7 +102,7 @@ globalkeys = gears.table.join(
         {description = "decrement useless gaps", group = "tag"}),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ modkey,           }, "Return", function () awful.spawn(variables.terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -225,7 +225,7 @@ globalkeys = gears.table.join(
 
   -- Toggle Picom
   awful.key({ modkey, "Control" }, "p", function ()
-    if is_picom_running() then
+    if variables.is_picom_running() then
       awful.spawn("pkill picom")
       naughty.notify({text = "Picom stopped!"})
     else
@@ -245,10 +245,10 @@ globalkeys = gears.table.join(
     mykeyboardlayout.next_layout();
   end, {description = "next keyboard layout", group = "awesome"}),
 
-awful.key({ altkey }, "h", function () switchAudioPort("analog-output-headphones") end,
+awful.key({ altkey }, "h", function () variables.switchAudioPort("analog-output-headphones") end,
     { description = "Switch to headphones", group = "audio" }),
 
-awful.key({ altkey }, "s", function () switchAudioPort("analog-output-lineout") end,
+awful.key({ altkey }, "j", function () variables.switchAudioPort("analog-output-lineout") end,
     { description = "Switch to speakers", group = "audio" })
 
 )
