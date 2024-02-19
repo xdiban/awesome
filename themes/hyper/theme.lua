@@ -15,14 +15,14 @@ theme.font          = "roboto 8"
 
 -- Palette colors
 theme.bg_normal     = "#3a2546"
-theme.bg_focus      = "#b7d396"
-theme.bg_urgent     = "#a33b69"
+theme.bg_focus      = "#a33b69"
+theme.bg_urgent     = "#b7d396"
 theme.bg_minimize   = "#f188c9"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#e9e4d7"
-theme.fg_focus      = "#152121"
-theme.fg_urgent     = "#e9e4d7"
+theme.fg_focus      = "#b7d396"
+theme.fg_urgent     = "#152121"
 theme.fg_minimize   = "#152121"
 
 theme.useless_gap   = dpi(5)
