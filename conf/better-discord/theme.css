@@ -38,6 +38,9 @@
   --background-2: #15121d;
   --background-accent: #15121d;
   --border-color: #add97a;
+  --alternative-color: #bb4d70;
+  --alternative-color-2: #daa58d;
+  --white: #ded9ce;
 }
 /*-------------LIGHT MODE------------*/
 .theme-light {
@@ -62,21 +65,21 @@
   /* modifiers */
   --background-modifier-hover: #262e33;
   --background-modifier-active: #495a63;
-  --background-modifier-selected: var(--accent-color);
+  --background-modifier-selected: var(--alternative-color);
   --background-modifier-accent: transparent;
   --background-message-hover: transparent;
   /* text */
-  --text-normal: var(--accent-color);
-  --text-positive: var(--text-normal);
-  --text-muted: #6d8692;
-  --text-link: #edf8fe;
+  --text-normal: var(--white);
+  --text-positive: var(--accent-color);
+  --text-muted: var(--accent-color);
+  --text-link: var(--alternative-color);
   --interactive-selected: var(--background-primary);
-  --interactive-active: var(--text-normal);
-  --interactive-normal: var(--text-normal);
+  --interactive-active: var(--white);
+  --interactive-normal: var(white);
   --interactive-muted: var(--button-background-active);
   --channels-default: var(--text-muted);
-  --header-primary: var(--text-normal);
-  --header-secondary: var(--text-muted);
+  --header-primary: var(--alternative-color-2);
+  --header-secondary: #bfd89c;
   /* more */
   --settings-icon-color: #8eacbc;
   --control-brand-foreground: var(--accent-color);
@@ -84,12 +87,12 @@
   --tab-selected: #354249;
   --switch: #3d4c53;
   --activity-card-background: var(--background-1);
-  --brand-experiment: var(--accent-color) !important;
+  --brand-experiment: var(--alternative-color-2) !important;
   /* buttons */
   --button-background: #2a3439;
   --button-background-hover: #354249;
   --button-background-active: #4d5f68;
-  --button-accent: var(--accent-color);
+  --button-accent: var(--alternative-color);
   --button-accent-hover: #d2f3ff;
   --button-accent-active: #8dd4f8;
   --button-destructive: #fb7c7c;
