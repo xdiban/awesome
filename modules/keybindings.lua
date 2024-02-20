@@ -236,17 +236,17 @@ globalkeys = gears.table.join(
 
   -- Lock screen - Lock
   awful.key({ modkey, "Shift" }, "d", function ()
-    awful.spawn(variables.lock_lock)
+    awful.spawn(variables.lock)
   end, {description = "lock (lock) screen", group = "awesome"}),
 
   -- Lock screen
   awful.key({ modkey, "Shift" }, "f", function ()
-    awful.spawn(variables.lock)
+    awful.spawn(variables.lock_black)
   end, {description = "lock screen", group = "awesome"}),
 
   -- Suspend
   awful.key({ modkey, "Shift" }, "s", function ()
-    awful.spawn("bash -c '" .. variables.lock .. " && systemctl suspend'")
+    awful.spawn("bash -c '" .. variables.lock_black .. " && systemctl suspend'")
   end, {description = "suspend", group = "awesome"}),
 
   -- Toggle Picom

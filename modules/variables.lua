@@ -12,8 +12,8 @@ M.terminal = "kitty"
 M.editor = os.getenv("EDITOR") or "nvim"
 M.browser = "firefox"
 M.screenshot = "flameshot gui"
-M.lock = "i3lock --color 65597f -n"
-M.lock_lock = "xtrlock"
+M.lock = "xtrlock -f"
+M.lock_black = "xtrlock -f -b"
 M.file_manager = "pcmanfm"
 
 M.is_picom_running = function ()
