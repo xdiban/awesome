@@ -152,7 +152,7 @@ awful.screen.connect_for_each_screen(function(s)
           layout = wibox.layout.fixed.horizontal,
           mykeyboardlayout,
           wibox.widget.systray(),
-          (is_laptop and batteryarc_widget() or nil),
+          (variables.is_laptop and batteryarc_widget() or nil),
           net_speed_widget(),
           cpu_widget(),
           mytextclock,
