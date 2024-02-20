@@ -31,6 +31,15 @@ mkdir ~/.config/picom && ln -sf ~/.config/awesome/conf/picom.conf ~/.config/pico
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ```
 
+Install custom theme
+
+```
+mkdir ~/.config/nvim/lua/custom/themes
+ln -sf ~/.config/awesome/conf/nvim/evangelion.lua ~/.config/nvim/lua/custom/themes/
+```
+
+Press Space + t + h and select theme
+
 ## Install Kitty Themes
 ```
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
