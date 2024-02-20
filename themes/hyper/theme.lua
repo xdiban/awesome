@@ -22,8 +22,8 @@ theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#e9e4d7"
 theme.fg_focus      = "#e9e4d7"
-theme.fg_urgent     = "#152121"
-theme.fg_minimize   = "#152121"
+theme.fg_urgent     = "#15121d"
+theme.fg_minimize   = "#15121d"
 
 theme.useless_gap   = dpi(5)
 theme.border_width  = dpi(1)
