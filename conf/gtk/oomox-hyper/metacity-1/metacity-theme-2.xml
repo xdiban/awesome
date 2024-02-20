@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <metacity_theme>
 <info>
-	<name>oomox-Bluloco-dark</name>
+	<name>oomox-hyper</name>
 	<author>Satyajit Sahoo</author>
 	<copyright>GPL-3.0+</copyright>
 	<date>11 December 2013</date>
@@ -11,8 +11,8 @@
 <!-- ::: CONSTANTS ::: -->
 <constant name="C_titlebar_focused" value="#15121d" />
 <constant name="C_titlebar_unfocused" value="#171624" />
-<constant name="C_border_focused" value="#add97a" />
-<constant name="C_border_unfocused" value="#15121d" />
+<constant name="C_border_focused" value="#a33b69" />
+<constant name="C_border_unfocused" value="#ede3e4" />
 <constant name="C_title_focused" value="#e9e4d7" />
 <constant name="C_title_unfocused" value="blend/#e9e4d7/#171624/0.4" />
 <constant name="C_icons_focused" value="#e9e4d7" />
