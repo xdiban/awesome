@@ -17,7 +17,7 @@ theme.font          = "roboto 8"
 theme.bg_normal     = "#15121d"
 theme.bg_focus      = "#a33b69"
 theme.bg_urgent     = "#add97a"
-theme.bg_minimize   = "#db9eb4"
+theme.bg_minimize   = "#e96eb4"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#e9e4d7"
