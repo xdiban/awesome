@@ -12,7 +12,7 @@ yay -Syu
 
 ## Install dependencies
 ```
-yay -S awesome-git npm zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utils brightnessctl ddcutil geoclue lxappearrance xclip neofetch xf86-input-synaptics acpi rofi noto-fonts-cjk betterlockscreen -y
+yay -S awesome-git npm zsh volctl picom lxsession redshift flameshot kitty nvim firefox i3lock xtrlock pcmanfm xfce4-power-manager network-manager-applet xorg-server xorg-xinit materia-gtk-theme capitaine-cursors lxapparence-gtk3 papirus-icon-theme blueman ripgrep alsa-utils brightnessctl ddcutil geoclue lxappearrance xclip neofetch xf86-input-synaptics acpi rofi noto-fonts-cjk -y
 ```
 
 ## Systemctl services
@@ -54,7 +54,7 @@ lxappearance
 
 ## Configure sleep and lock
 ```
-xfconf-query --create -c xfce4-session -p /general/LockCommand -t string -s "betterlockscreen --lock"
+xfconf-query --create -c xfce4-session -p /general/LockCommand -t string -s "xtrlock -f -b"
 ```
 
 ## Install zsh and extentions
