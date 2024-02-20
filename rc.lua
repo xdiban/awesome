@@ -132,7 +132,6 @@ awful.screen.connect_for_each_screen(function(s)
       screen  = s,
       filter  = awful.widget.tasklist.filter.currenttags,
       buttons = tasklist_buttons,
-      opacity = 0,
   }
 
 

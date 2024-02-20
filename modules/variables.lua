@@ -12,7 +12,7 @@ M.terminal = "kitty"
 M.editor = os.getenv("EDITOR") or "nvim"
 M.browser = "firefox"
 M.screenshot = "flameshot gui"
-M.lock = "betterlockscreen --lock"
+M.lock = "i3lock --color 65597f -n"
 M.lock_lock = "xtrlock"
 M.file_manager = "pcmanfm"
 
