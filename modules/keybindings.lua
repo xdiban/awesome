@@ -170,7 +170,7 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey, "Control" }, "Tab",     function () awful.spawn.with_shell("rofi -show window") end,
               {description = "switch between windows", group = "launcher"}),
-
+  --[[
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run {
@@ -181,6 +181,7 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+  --]]
     -- Menubar
     awful.key({ modkey }, "p", function() awful.spawn.with_shell("rofi -show drun") end,
               {description = "show the list of apps", group = "launcher"}),
