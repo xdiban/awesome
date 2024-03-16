@@ -197,11 +197,11 @@ globalkeys = gears.table.join(
 
   -- Volume Keys
   awful.key({}, "XF86AudioLowerVolume", function ()
-      awful.spawn("amixer -q -D pulse sset Master 5%-")
+      awful.spawn("amixer -q -D pipewire sset Master 5%-")
   end, {description = "volume -", group = "hotkeys"}),
 
   awful.key({}, "XF86AudioRaiseVolume", function ()
-      awful.spawn("amixer -q -D pulse sset Master 5%+")
+      awful.spawn("amixer -q -D pipewire sset Master 5%+")
   end, {description = "volume +", group = "hotkeys"}),
 
   awful.key({}, "XF86AudioMute", function ()
