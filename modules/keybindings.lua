@@ -205,7 +205,7 @@ globalkeys = gears.table.join(
   end, {description = "volume +", group = "hotkeys"}),
 
   awful.key({}, "XF86AudioMute", function ()
-      awful.spawn("amixer -D pulse set Master 1+ toggle")
+      awful.spawn("amixer -D pipewire set Master 1+ toggle")
   end, {description = "toggle mute", group = "hotkeys"}),
 
   -- Media Keys
