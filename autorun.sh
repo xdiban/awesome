@@ -34,3 +34,6 @@ run nm-applet
 
 #Bluetooth applet
 run blueman-applet
+
+#Nvidia Config
+nvidia-settings --load-config-only

@@ -134,7 +134,6 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-
     awful.key({ modkey, altkey    }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey, altkey    }, "h",     function () awful.tag.incmwfact(-0.05)          end,
@@ -272,16 +271,13 @@ globalkeys = gears.table.join(
   end, {description = "toggle statusbar", group = "awesome"}),
 
   -- Layout
-  awful.key({ altkey }, "Shift_L", function ()
+  awful.key({ altkey, modkey }, "Shift_R", function ()
     mykeyboardlayout.next_layout();
   end, {description = "next keyboard layout", group = "awesome"}),
 
-awful.key({ altkey }, "h", function () variables.switchAudioPort("analog-output-headphones") end,
-    { description = "Switch to headphones", group = "audio" }),
-
-awful.key({ altkey }, "j", function () variables.switchAudioPort("analog-output-lineout") end,
-    { description = "Switch to speakers", group = "audio" })
-
+  awful.key({ altkey }, "F10", function ()
+  awful.spawn("/home/xavi/gpu-screen-recorder/scripts/save-replay.sh")
+  end, {description = "save replay", group = "replay"})
 )
 
 clientkeys = gears.table.join(

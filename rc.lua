@@ -42,6 +42,10 @@ beautiful.init(variables.theme_path)
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+local volume_widget = require('awesome-wm-widgets.pactl-widget.volume')
+local pacman_widget = require('awesome-wm-widgets.pacman-widget.pacman')
+local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -136,7 +140,8 @@ awful.screen.connect_for_each_screen(function(s)
 
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, margins = { top = 10, bottom = 0, left = 10, right = 10 }})
+    -- s.mywibox = awful.wibar({ position = "top", screen = s, margins = { top = 10, bottom = 0, left = 10, right = 10 }})
+    s.mywibox = awful.wibar({ position = "top", screen = s})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -155,6 +160,9 @@ awful.screen.connect_for_each_screen(function(s)
           (variables.is_laptop and batteryarc_widget() or nil),
           net_speed_widget(),
           cpu_widget(),
+          --ram_widget(),
+          --volume_widget(),
+          pacman_widget(),
           mytextclock,
           s.mylayoutbox,
         },
