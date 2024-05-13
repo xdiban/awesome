@@ -275,6 +275,12 @@ globalkeys = gears.table.join(
     mykeyboardlayout.next_layout();
   end, {description = "next keyboard layout", group = "awesome"}),
 
+  awful.key({ altkey, "Control" }, "[", function () variables.switchAudioPort("analog-output-headphones") end,
+    { description = "Switch to headphones", group = "audio" }),
+
+  awful.key({ altkey, "Control" }, "]", function () variables.switchAudioPort("analog-output-lineout") end,
+    { description = "Switch to speakers", group = "audio" }),
+
   awful.key({ altkey }, "F10", function ()
   awful.spawn("/home/xavi/gpu-screen-recorder/scripts/save-replay.sh")
   end, {description = "save replay", group = "replay"})
