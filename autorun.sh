@@ -27,7 +27,7 @@ run redshift-gtk
 run flameshot
 
 #Power management
-run xfce4-power-management
+#run xfce4-power-management
 
 #Network manager applet
 run nm-applet

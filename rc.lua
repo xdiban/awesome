@@ -141,7 +141,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     -- s.mywibox = awful.wibar({ position = "top", screen = s, margins = { top = 10, bottom = 0, left = 10, right = 10 }})
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = math.floor(awful.screen.focused().geometry.height * 0.015)})
+    s.mywibox = awful.wibar({ position = "top", screen = s})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
