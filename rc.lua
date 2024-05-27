@@ -42,16 +42,14 @@ beautiful.init(variables.theme_path)
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-local volume_widget = require('awesome-wm-widgets.pactl-widget.volume')
 local pacman_widget = require('awesome-wm-widgets.pacman-widget.pacman')
-local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock(" %a %Y-%m-%d %H:%M ")
+mytextclock = wibox.widget.textclock(" %a %d %H:%M ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -147,40 +145,25 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+            s.mylayoutbox,
             layout = wibox.layout.fixed.horizontal,
-            --mylauncher,
             s.mytaglist,
-            --s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
           mykeyboardlayout,
-          wibox.widget.systray(),
           (variables.is_laptop and batteryarc_widget() or nil),
           net_speed_widget(),
           cpu_widget(),
-          --ram_widget(),
-          --volume_widget(),
           pacman_widget(),
           mytextclock,
-          s.mylayoutbox,
+          wibox.widget.systray(),
         },
     }
 
 
 end)
--- }}}
-
---[[
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
--- }}}
-]]
 
 require("modules.keybindings")
 
