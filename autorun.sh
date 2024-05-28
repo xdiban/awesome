@@ -27,7 +27,7 @@ run redshift-gtk
 run flameshot
 
 #Power management
-#run xfce4-power-management
+run xfce4-power-management
 
 #Network manager applet
 run nm-applet
@@ -37,3 +37,9 @@ run blueman-applet
 
 #Nvidia Config
 nvidia-settings --load-config-only
+
+#Test
+xset s off -dpms
+
+#numlock
+numlockx on

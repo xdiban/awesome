@@ -38,12 +38,6 @@ beautiful.init(variables.theme_path)
 
 -- }}}
 
--- Widgets
-local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-local pacman_widget = require('awesome-wm-widgets.pacman-widget.pacman')
-
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
@@ -111,7 +105,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "一", "二", "三", "四", "五", "六", "七", "八", "九" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
     -- Create a promptbox for each screen
     -- s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -145,7 +139,6 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
-            s.mylayoutbox,
             layout = wibox.layout.fixed.horizontal,
             s.mytaglist,
         },
@@ -153,12 +146,10 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
           mykeyboardlayout,
-          (variables.is_laptop and batteryarc_widget() or nil),
-          net_speed_widget(),
-          cpu_widget(),
-          pacman_widget(),
-          mytextclock,
           wibox.widget.systray(),
+          --(variables.is_laptop and batteryarc_widget() or nil),
+          mytextclock,
+          s.mylayoutbox,
         },
     }
 
